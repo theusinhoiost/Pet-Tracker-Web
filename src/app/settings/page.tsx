@@ -20,16 +20,28 @@ import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Header from "@/components/ui/header";
 import { LanguageSwitcher } from "@/components/ui/language-selector";
 import ThemeSettingsChanger from "@/components/ui/settings/theme-settings-changer";
 import BackButton from "@/components/ui/back-button";
+import { useAuth } from "@/hooks/use-auth";
 
 export default function SettingsPage() {
+  const { user } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
+
+  const userInitials = user?.name
+    ? user.name
+      .trim()
+      .split(/\s+/)
+      .map((part) => part[0])
+      .slice(0, 2)
+      .join("")
+      .toUpperCase()
+    : "U";
 
   return (
     <main className="min-h-screen bg-background text-foreground">
@@ -62,13 +74,20 @@ export default function SettingsPage() {
             <CardContent className="p-4">
               <div className="mb-6 flex items-center gap-3 rounded-2xl border bg-muted/40 p-3">
                 <Avatar className="h-12 w-12">
-                  <AvatarFallback>MI</AvatarFallback>
+                  {user?.avatar && (
+                    <AvatarImage
+                      src={user.avatar}
+                      alt={user.name || "Avatar do usuário"}
+                      className="object-cover"
+                    />
+                  )}
+                  <AvatarFallback>{userInitials}</AvatarFallback>
                 </Avatar>
 
-                <div>
-                  <p className="font-medium">Matheus Iost</p>
-                  <p className="text-sm text-muted-foreground">
-                    Software Engineer
+                <div className="min-w-0">
+                  <p className="font-medium truncate">{user?.name || "Usuário"}</p>
+                  <p className="text-sm text-muted-foreground truncate">
+                    {user?.email || ""}
                   </p>
                 </div>
               </div>
@@ -107,12 +126,18 @@ export default function SettingsPage() {
                 <div className="grid gap-5 md:grid-cols-2">
                   <div className="space-y-2">
                     <Label>Nome</Label>
-                    <Input defaultValue="Matheus Iost" />
+                    <Input
+                      key={`name-${user?.name}`}
+                      defaultValue={user?.name || ""}
+                    />
                   </div>
 
                   <div className="space-y-2">
                     <Label>Email</Label>
-                    <Input defaultValue="matheus@email.com" />
+                    <Input
+                      key={`email-${user?.email}`}
+                      defaultValue={user?.email || ""}
+                    />
                   </div>
 
                   <div className="space-y-2">

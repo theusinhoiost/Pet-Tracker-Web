@@ -19,6 +19,7 @@ export const LoginResponseSchema = z.object({
     id: z.string(),
     name: z.string(),
     email: z.email(),
+    avatar: z.string().nullable().optional(),
   }),
 });
 

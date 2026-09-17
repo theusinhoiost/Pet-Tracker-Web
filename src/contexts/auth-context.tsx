@@ -1,7 +1,5 @@
 "use client";
 
-import { api } from "@/services/api/api";
-import router from "next/router";
 import {
   createContext,
   useEffect,
@@ -9,13 +7,13 @@ import {
   ReactNode,
   useCallback,
 } from "react";
+import {
+  AuthUser,
+  getCurrentUserAction,
+  logoutAction,
+} from "@/actions/user/get-user-action";
 
-type User = {
-  id: string;
-  email: string;
-  name: string;
-  // adicione outros campos se necessário
-};
+export type User = AuthUser;
 
 type AuthContextType = {
   user: User | null;
@@ -29,30 +27,36 @@ export const AuthContext = createContext<AuthContextType>(
   {} as AuthContextType,
 );
 
+function getInitialUser(): User | null {
+  if (typeof document === "undefined") return null;
+  try {
+    const match = document.cookie.match(/(?:^|;\s*)user=([^;]+)/);
+    if (match) {
+      const decoded = decodeURIComponent(match[1]);
+      return JSON.parse(decoded) as User;
+    }
+  } catch { }
+  return null;
+}
+
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<User | null>(getInitialUser);
   const [loading, setLoading] = useState(true);
 
   const checkAuth = useCallback(async () => {
     try {
-      const { data } = await api.get("/auth/me");
-      setUser(data.user || data);
+      const currentUser = await getCurrentUserAction();
+      setUser(currentUser);
     } catch (error) {
-      setUser(null);
+      console.error("Erro ao verificar autenticação:", error);
     } finally {
       setLoading(false);
     }
   }, []);
 
   const logout = async () => {
-    try {
-      await api.post("/auth/logout");
-    } catch (error) {
-      console.error("Erro ao fazer logout", error);
-    }
-
     setUser(null);
-    router.push("/login");
+    await logoutAction();
   };
 
   useEffect(() => {

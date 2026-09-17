@@ -47,6 +47,7 @@ export const PublicUserSchema = z.object({
   name: z.string().default(""),
   phone: z.string().default(""),
   email: z.string().default(""),
+  avatar: z.string().nullable().optional(),
 });
 
 export const UpdatePasswordSchema = z
@@ -88,7 +89,9 @@ export const UpdatePasswordSchema = z
 export const UpdateUserSchema = UserBaseSchema.omit({
   password: true,
   confirmPassword: true,
-}).extend({});
+}).extend({
+  avatar: z.string().nullable().optional(),
+});
 
 export type CreateUserDto = z.infer<typeof CreateUserSchema>;
 export type UpdateUserDto = z.infer<typeof UpdateUserSchema>;

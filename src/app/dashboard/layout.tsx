@@ -10,27 +10,30 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import {
-  Sheet,
-  SheetContent,
-  SheetFooter,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
-import SheetNotificationCard from "@/components/notifications/sheet-notification-card";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import Link from "next/link";
 import { LogOut } from "lucide-react";
 import Header from "@/components/ui/header";
 import Footer from "@/components/ui/footer";
 import NotificationsSheet from "@/components/notifications/notifications-sheet";
+import { useAuth } from "@/hooks/use-auth";
 
 export default function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const { user, logout } = useAuth();
+
+  const userInitials = user?.name
+    ? user.name
+      .trim()
+      .split(/\s+/)
+      .map((part) => part[0])
+      .slice(0, 2)
+      .join("")
+      .toUpperCase()
+    : "U";
+
   return (
     <div className="min-h-screen bg-background/80 text-foreground flex flex-col transition-colors duration-300">
       <Header>
@@ -39,11 +42,14 @@ export default function DashboardLayout({
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" size="icon" className="rounded-full">
                 <Avatar>
-                  <AvatarImage
-                    src="https://github.com/shadcn.png"
-                    alt="shadcn"
-                  />
-                  <AvatarFallback>CN</AvatarFallback>
+                  {user?.avatar && (
+                    <AvatarImage
+                      src={user.avatar}
+                      alt={user.name || "Avatar do usuário"}
+                      className="object-cover"
+                    />
+                  )}
+                  <AvatarFallback>{userInitials}</AvatarFallback>
                 </Avatar>
               </Button>
             </DropdownMenuTrigger>
@@ -58,7 +64,7 @@ export default function DashboardLayout({
               </DropdownMenuGroup>
               <DropdownMenuSeparator />
               <DropdownMenuGroup>
-                <DropdownMenuItem variant="destructive">
+                <DropdownMenuItem variant="destructive" onClick={logout}>
                   Sair da conta <LogOut />
                 </DropdownMenuItem>
               </DropdownMenuGroup>

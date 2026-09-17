@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
 import { Toaster } from "@/components/ui/sonner";
+import { AuthProvider } from "@/contexts/auth-context";
 export const metadata: Metadata = {
   title: {
     template: "  PetTracker | %s",
@@ -36,8 +37,10 @@ export default async function RootLayout({
           disableTransitionOnChange
         >
           <NextIntlClientProvider locale={locale} messages={messages}>
-            <Toaster />
-            {children}
+            <AuthProvider>
+              <Toaster />
+              {children}
+            </AuthProvider>
           </NextIntlClientProvider>
         </ThemeProvider>
       </body>
