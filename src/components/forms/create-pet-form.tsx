@@ -88,6 +88,7 @@ export function CreatePetForm({
                       <SelectItem value="fish">Peixe</SelectItem>
                       <SelectItem value="rabbit">Coelho</SelectItem>
                       <SelectItem value="other">Outro</SelectItem>
+
                     </SelectGroup>
                   </SelectContent>
                 </Select>
