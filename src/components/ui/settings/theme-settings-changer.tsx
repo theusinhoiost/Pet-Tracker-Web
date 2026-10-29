@@ -1,22 +1,24 @@
 "use client";
 import { Monitor, Moon, Sun, Palette, LucideIcon } from "lucide-react";
 import { useTheme } from "next-themes";
+import { useTranslations } from "next-intl";
 import { Card, CardContent } from "../card";
 
 import { Separator } from "../separator";
 
 export default function ThemeSettingsChanger() {
   const { theme, setTheme } = useTheme();
+  const t = useTranslations("settings.appearance");
 
   return (
     <Card className="rounded-3xl border-border/50 shadow-sm">
       <CardContent className="space-y-6 p-6">
         <div className="flex items-center justify-between">
           <div>
-            <h2 className="text-xl font-semibold">Aparência</h2>
+            <h2 className="text-xl font-semibold">{t("title")}</h2>
 
             <p className="text-sm text-muted-foreground">
-              Customize o visual da plataforma.
+              {t("description")}
             </p>
           </div>
 
@@ -27,17 +29,17 @@ export default function ThemeSettingsChanger() {
 
         <div className="flex gap-8 justify-center">
           <div onClick={() => setTheme("light")}>
-            <ThemeCard icon={Sun} title="Claro" active={theme === "light"} />
+            <ThemeCard icon={Sun} title={t("light")} active={theme === "light"} />
           </div>
 
           <div onClick={() => setTheme("dark")}>
-            <ThemeCard icon={Moon} title="Escuro" active={theme === "dark"} />
+            <ThemeCard icon={Moon} title={t("dark")} active={theme === "dark"} />
           </div>
 
           <div onClick={() => setTheme("system")}>
             <ThemeCard
               icon={Monitor}
-              title="Sistema"
+              title={t("system")}
               active={theme === "system"}
             />
           </div>

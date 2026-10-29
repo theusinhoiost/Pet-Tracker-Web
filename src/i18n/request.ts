@@ -12,7 +12,9 @@ const messages = {
 export default getRequestConfig(async () => {
   const cookieStore = await cookies();
 
-  const locale = cookieStore.get("locale")?.value === "pt" ? "pt" : "en";
+  const rawLocale = cookieStore.get("locale")?.value;
+  const locale =
+    rawLocale && rawLocale.toLowerCase().startsWith("pt") ? "pt" : "en";
 
   return {
     locale,

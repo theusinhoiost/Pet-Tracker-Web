@@ -28,10 +28,14 @@ import { LanguageSwitcher } from "@/components/ui/language-selector";
 import ThemeSettingsChanger from "@/components/ui/settings/theme-settings-changer";
 import BackButton from "@/components/ui/back-button";
 import { useAuth } from "@/hooks/use-auth";
+import { useTranslations, useLocale } from "next-intl";
 
 export default function SettingsPage() {
   const { user } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
+  const t = useTranslations("settings");
+  const tCommon = useTranslations("common");
+  const locale = useLocale();
 
   const userInitials = user?.name
     ? user.name
@@ -48,22 +52,22 @@ export default function SettingsPage() {
       <Header />
 
       <div className="mx-auto max-w-7xl px-4 py-10">
-        {/* HEADER AJUSTADO */}
+        {/* HEADER */}
         <div className="mb-10 flex flex-col gap-3">
-          {/* LINHA COM VOLTAR + BADGE */}
+          {/* VOLTAR + BADGE */}
           <div className="flex items-center gap-3">
             <BackButton />
             <span className="w-fit rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-sm font-medium text-primary">
-              Configurações
+              {t("badge")}
             </span>
           </div>
 
           <div>
             <h1 className="text-4xl font-bold tracking-tight">
-              Gerencie sua conta
+              {t("title")}
             </h1>
             <p className="mt-2 text-muted-foreground">
-              Personalize preferências, segurança e notificações.
+              {t("description")}
             </p>
           </div>
         </div>
@@ -77,7 +81,7 @@ export default function SettingsPage() {
                   {user?.avatar && (
                     <AvatarImage
                       src={user.avatar}
-                      alt={user.name || "Avatar do usuário"}
+                      alt={user.name || "Avatar"}
                       className="object-cover"
                     />
                   )}
@@ -85,7 +89,7 @@ export default function SettingsPage() {
                 </Avatar>
 
                 <div className="min-w-0">
-                  <p className="font-medium truncate">{user?.name || "Usuário"}</p>
+                  <p className="font-medium truncate">{user?.name || t("personalInfo.userDefault")}</p>
                   <p className="text-sm text-muted-foreground truncate">
                     {user?.email || ""}
                   </p>
@@ -93,12 +97,12 @@ export default function SettingsPage() {
               </div>
 
               <nav className="space-y-1">
-                <SidebarItem icon={User} label="Perfil" active />
-                <SidebarItem icon={Bell} label="Notificações" />
-                <SidebarItem icon={ShieldCheck} label="Privacidade" />
-                <SidebarItem icon={Lock} label="Segurança" />
-                <SidebarItem icon={Palette} label="Aparência" />
-                <SidebarItem icon={Smartphone} label="Dispositivos" />
+                <SidebarItem icon={User} label={t("sidebar.profile")} active />
+                <SidebarItem icon={Bell} label={t("sidebar.notifications")} />
+                <SidebarItem icon={ShieldCheck} label={t("sidebar.privacy")} />
+                <SidebarItem icon={Lock} label={t("sidebar.security")} />
+                <SidebarItem icon={Palette} label={t("sidebar.appearance")} />
+                <SidebarItem icon={Smartphone} label={t("sidebar.devices")} />
               </nav>
             </CardContent>
           </Card>
@@ -111,10 +115,10 @@ export default function SettingsPage() {
                 <div className="flex items-center justify-between">
                   <div>
                     <h2 className="text-xl font-semibold">
-                      Informações pessoais
+                      {t("personalInfo.title")}
                     </h2>
                     <p className="text-sm text-muted-foreground">
-                      Atualize os dados da sua conta.
+                      {t("personalInfo.description")}
                     </p>
                   </div>
 
@@ -125,7 +129,7 @@ export default function SettingsPage() {
 
                 <div className="grid gap-5 md:grid-cols-2">
                   <div className="space-y-2">
-                    <Label>Nome</Label>
+                    <Label>{t("personalInfo.name")}</Label>
                     <Input
                       key={`name-${user?.name}`}
                       defaultValue={user?.name || ""}
@@ -133,7 +137,7 @@ export default function SettingsPage() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label>Email</Label>
+                    <Label>{t("personalInfo.email")}</Label>
                     <Input
                       key={`email-${user?.email}`}
                       defaultValue={user?.email || ""}
@@ -141,18 +145,21 @@ export default function SettingsPage() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label>Idioma</Label>
-                    <Input defaultValue="Português (Brasil)" />
+                    <Label>{t("personalInfo.language")}</Label>
+                    <Input
+                      readOnly
+                      value={locale.startsWith("pt") ? "Português (Brasil)" : "English (US)"}
+                    />
                   </div>
 
                   <div className="space-y-2">
-                    <Label>Localização</Label>
-                    <Input defaultValue="São Paulo, Brasil" />
+                    <Label>{t("personalInfo.location")}</Label>
+                    <Input defaultValue={locale.startsWith("pt") ? "Brasil" : "United States"} />
                   </div>
                 </div>
 
                 <div className="flex justify-end">
-                  <Button className="rounded-xl">Salvar alterações</Button>
+                  <Button className="rounded-xl">{tCommon("saveChanges")}</Button>
                 </div>
               </CardContent>
             </Card>
@@ -162,9 +169,9 @@ export default function SettingsPage() {
               <CardContent className="space-y-6 p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <h2 className="text-xl font-semibold">Seleção de idioma</h2>
+                    <h2 className="text-xl font-semibold">{t("language.title")}</h2>
                     <p className="text-sm text-muted-foreground">
-                      Escolha o idioma do seu texto
+                      {t("language.description")}
                     </p>
                   </div>
                   <Globe className="h-5 w-5 text-muted-foreground" />
@@ -180,9 +187,9 @@ export default function SettingsPage() {
               <CardContent className="space-y-6 p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <h2 className="text-xl font-semibold">Segurança</h2>
+                    <h2 className="text-xl font-semibold">{t("security.title")}</h2>
                     <p className="text-sm text-muted-foreground">
-                      Proteja sua conta e altere sua senha.
+                      {t("security.description")}
                     </p>
                   </div>
 
@@ -192,7 +199,7 @@ export default function SettingsPage() {
                 <Separator />
 
                 <div className="space-y-2">
-                  <Label>Senha</Label>
+                  <Label>{t("security.password")}</Label>
 
                   <div className="relative">
                     <Input
@@ -218,14 +225,14 @@ export default function SettingsPage() {
                 <div className="space-y-4">
                   <SettingSwitch
                     icon={ShieldCheck}
-                    title="Autenticação em 2 fatores"
-                    description="Adicione uma camada extra de segurança."
+                    title={t("security.twoFactor")}
+                    description={t("security.twoFactorDesc")}
                   />
 
                   <SettingSwitch
                     icon={Smartphone}
-                    title="Login por biometria"
-                    description="Permitir acesso rápido em dispositivos móveis."
+                    title={t("security.biometrics")}
+                    description={t("security.biometricsDesc")}
                   />
                 </div>
               </CardContent>
@@ -239,9 +246,9 @@ export default function SettingsPage() {
               <CardContent className="space-y-6 p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <h2 className="text-xl font-semibold">Notificações</h2>
+                    <h2 className="text-xl font-semibold">{t("notifications.title")}</h2>
                     <p className="text-sm text-muted-foreground">
-                      Escolha como deseja receber avisos.
+                      {t("notifications.description")}
                     </p>
                   </div>
 
@@ -253,20 +260,20 @@ export default function SettingsPage() {
                 <div className="space-y-4">
                   <SettingSwitch
                     icon={Mail}
-                    title="Notificações por email"
-                    description="Receba atualizações importantes por email."
+                    title={t("notifications.email")}
+                    description={t("notifications.emailDesc")}
                   />
 
                   <SettingSwitch
                     icon={Bell}
-                    title="Push notifications"
-                    description="Alertas em tempo real no navegador."
+                    title={t("notifications.push")}
+                    description={t("notifications.pushDesc")}
                   />
 
                   <SettingSwitch
                     icon={Globe}
-                    title="Novidades da plataforma"
-                    description="Receba anúncios e novos recursos."
+                    title={t("notifications.platform")}
+                    description={t("notifications.platformDesc")}
                   />
                 </div>
               </CardContent>

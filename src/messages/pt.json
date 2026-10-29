@@ -1,6 +1,173 @@
 {
   "common": {
     "save": "Salvar",
-    "cancel": "Cancelar"
+    "saveChanges": "Salvar alterações",
+    "cancel": "Cancelar",
+    "delete": "Excluir",
+    "edit": "Editar",
+    "back": "Voltar",
+    "loading": "Carregando...",
+    "clean": "Limpar",
+    "cleaning": "Limpando...",
+    "view": "Visualizar",
+    "close": "Fechar",
+    "confirm": "Confirmar",
+    "actions": "Ações",
+    "success": "Sucesso",
+    "error": "Erro"
+  },
+  "navigation": {
+    "home": "Início",
+    "dashboard": "Painel",
+    "pets": "Pets",
+    "settings": "Configurações",
+    "legal": "Termos & Privacidade",
+    "login": "Entrar",
+    "signup": "Cadastrar",
+    "logout": "Sair"
+  },
+  "settings": {
+    "badge": "Configurações",
+    "title": "Gerencie sua conta",
+    "description": "Personalize preferências, segurança e notificações.",
+    "sidebar": {
+      "profile": "Perfil",
+      "notifications": "Notificações",
+      "privacy": "Privacidade",
+      "security": "Segurança",
+      "appearance": "Aparência",
+      "devices": "Dispositivos"
+    },
+    "personalInfo": {
+      "title": "Informações pessoais",
+      "description": "Atualize os dados da sua conta.",
+      "name": "Nome",
+      "email": "Email",
+      "language": "Idioma",
+      "location": "Localização",
+      "save": "Salvar alterações",
+      "userDefault": "Usuário"
+    },
+    "language": {
+      "title": "Seleção de idioma",
+      "description": "Escolha o idioma do seu texto",
+      "portuguese": "Português (Brasil)",
+      "english": "Inglês (English)"
+    },
+    "security": {
+      "title": "Segurança",
+      "description": "Proteja sua conta e altere sua senha.",
+      "password": "Senha",
+      "twoFactor": "Autenticação em 2 fatores",
+      "twoFactorDesc": "Adicione uma camada extra de segurança.",
+      "biometrics": "Login por biometria",
+      "biometricsDesc": "Permitir acesso rápido em dispositivos móveis."
+    },
+    "appearance": {
+      "title": "Aparência",
+      "description": "Customize o visual da plataforma.",
+      "light": "Claro",
+      "dark": "Escuro",
+      "system": "Sistema"
+    },
+    "notifications": {
+      "title": "Notificações",
+      "description": "Escolha como deseja receber avisos.",
+      "email": "Notificações por email",
+      "emailDesc": "Receba atualizações importantes por email.",
+      "push": "Push notifications",
+      "pushDesc": "Alertas em tempo real no navegador.",
+      "platform": "Novidades da plataforma",
+      "platformDesc": "Receba anúncios e novos recursos."
+    }
+  },
+  "dashboard": {
+    "title": "Dashboard - Seus Pets",
+    "activePets": "Pets Ativos",
+    "activePetsSubtitle": "Registrados na sua conta",
+    "upcomingAlerts": "Alertas Próximos",
+    "noAlerts": "Nenhum alerta no momento",
+    "pendingAlerts": "Você tem alertas pendentes",
+    "lastActivity": "Última Atividade",
+    "recent": "Recente",
+    "noRecentActivity": "Nenhuma atividade recente",
+    "myPets": "Meus Pets",
+    "addPet": "Adicionar Pet",
+    "noPets": "Nenhum pet cadastrado ainda.",
+    "noPetsDescription": "Comece adicionando seu primeiro pet para acompanhar sua saúde e histórico."
+  },
+  "notifications": {
+    "button": "Notificações",
+    "title": "Notificações",
+    "subtitle": "Atualizações recentes sobre seus pets",
+    "empty": "Nenhuma notificação",
+    "clearAll": "Limpar",
+    "clearing": "Limpando...",
+    "markAsRead": "Marcar como lida"
+  },
+  "pet": {
+    "name": "Nome",
+    "namePlaceholder": "Nome do pet",
+    "species": "Espécie",
+    "speciesPlaceholder": "Selecione a espécie",
+    "breed": "Raça",
+    "breedPlaceholder": "Raça do animal",
+    "gender": "Gênero",
+    "male": "Macho",
+    "female": "Fêmea",
+    "dog": "Cachorro",
+    "cat": "Gato",
+    "bird": "Pássaro",
+    "other": "Outro",
+    "birthDate": "Data de Nascimento",
+    "weight": "Peso",
+    "notes": "Observações",
+    "notesPlaceholder": "Histórico médico, hábitos ou observações importantes...",
+    "photo": "Foto do Pet",
+    "photoUploadHelp": "Arraste e solte uma imagem ou clique para selecionar",
+    "addSuccess": "Pet adicionado com sucesso",
+    "updateSuccess": "Pet atualizado com sucesso",
+    "deleteSuccess": "Pet removido com sucesso",
+    "deleteConfirmation": "Tem certeza que deseja excluir este pet?"
+  },
+  "vaccines": {
+    "title": "Vacinas",
+    "subtitle": "Histórico de vacinação e próximas doses",
+    "addVaccine": "Adicionar Vacina",
+    "vaccineName": "Nome da Vacina",
+    "vaccinePlaceholder": "Ex: Antirrábica, V8, V10",
+    "appliedAt": "Data de Aplicação",
+    "nextDose": "Próxima Dose",
+    "noVaccines": "Nenhuma vacina registrada",
+    "createSuccess": "Vacina registrada com sucesso",
+    "deleteSuccess": "Vacina removida com sucesso"
+  },
+  "weight": {
+    "title": "Histórico de Peso",
+    "subtitle": "Evolução do peso ao longo do tempo",
+    "addWeight": "Registrar Peso",
+    "weightKg": "Peso (kg)",
+    "date": "Data",
+    "noData": "Sem dados de peso registrados ainda",
+    "recordSuccess": "Peso registrado com sucesso"
+  },
+  "auth": {
+    "welcomeBack": "Bem-vindo de volta",
+    "signInSubtitle": "Entre na sua conta para continuar",
+    "googleLogin": "Continuar com Google",
+    "orEmail": "Ou continue com email",
+    "email": "Email",
+    "password": "Senha",
+    "forgotPassword": "Esqueceu a senha?",
+    "signInButton": "Entrar",
+    "noAccount": "Não tem uma conta?",
+    "signUpLink": "Cadastre-se",
+    "createAccount": "Criar uma conta",
+    "signUpSubtitle": "Preencha seus dados para começar a cuidar dos seus pets",
+    "name": "Nome completo",
+    "confirmPassword": "Confirmar senha",
+    "signUpButton": "Cadastrar",
+    "hasAccount": "Já tem uma conta?",
+    "loginLink": "Faça login"
   }
 }

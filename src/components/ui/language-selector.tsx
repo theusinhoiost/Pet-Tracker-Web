@@ -23,13 +23,12 @@ export function LanguageSwitcher() {
   return (
     <div className="flex items-center gap-2">
       <Select value={locale} onValueChange={handleChange}>
-        <SelectTrigger className="w-45 border-muted-foreground">
+        <SelectTrigger className="w-52 border-muted-foreground">
           <SelectValue />
         </SelectTrigger>
 
         <SelectContent>
-          <SelectItem value="pt">🇧🇷 Português</SelectItem>
-
+          <SelectItem value="pt">🇧🇷 Português (Brasil)</SelectItem>
           <SelectItem value="en">🇺🇸 English</SelectItem>
         </SelectContent>
       </Select>
